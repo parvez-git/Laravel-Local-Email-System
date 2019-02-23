@@ -49,11 +49,11 @@
                             @if($totalnotification != 0)
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownNotify">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
-                                    <span class="dropdown-item">
+                                    <a class="dropdown-item" href="{{ route('home.viewmessage',['id' => $notification->data['msgid'], 'notificationid' => $notification->id]) }}">
                                         {{ $notification->data['subject'] }}
-                                    </span>
+                                    </a>
                                 @endforeach
-                                <a class="dropdown-item border-top" href="{{ route('home.notification.clear') }}">Clear Notifications</a>
+                                <a class="dropdown-item border-top" href="{{ route('home.notification.clear') }}">Clear All Notifications</a>
                             </div>
                             @endif
                         </li>

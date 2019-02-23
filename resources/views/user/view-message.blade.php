@@ -12,13 +12,15 @@
 
                 <div class="card-body">
 
-                    <h4><span class="text-muted">Subject:</span> {{ $viewmessage->subject }}</h4>
+                    <h4>
+                        <span class="text-muted">Subject:</span> {{ $viewmessage->subject }}
+                        <a href="{{ route('home') }}" class="btn btn-sm btn-secondary float-right">Back</a>
+                    </h4>
                     <em>By {{ $viewmessage->fromUser->name }} < {{ $viewmessage->fromUser->email }} > at {{ $viewmessage->created_at->format('d M, Y') }}</em>
                     
                     <p class="border-top pt-2">{{ $viewmessage->body }}</p>
 
                 </div>
-
             </div>
 
         </div>

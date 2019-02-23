@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('admin')->default(0);
             $table->boolean('block')->default(0);
+            $table->boolean('returned')->default(0);
             $table->timestamp('login_at')->default(now());
             $table->rememberToken();
             $table->timestamps();

@@ -30,9 +30,11 @@
                                 <span class="font-weight-bold">
                                     {{ $message->subject }}
                                 </span>
+                                @if($message->toUser)
                                 <span class="font-italic">
                                     to {{ $message->toUser->name }}
                                 </span>
+                                @endif
                             </div>
                             <span class="d-block">{{ $message->body }}</span>
                         </li>

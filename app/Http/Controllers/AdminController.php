@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class AdminController extends Controller
 
     public function returned()
     {
-        
+        $users = User::where('returned', true)->where('admin', '!=', Auth::id())->get();
+
+        return view('admin.returneduser', compact('users'));
     }
 
 

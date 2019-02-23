@@ -41,18 +41,24 @@ class HomeController extends Controller
         $users = User::orderBy('email')
                      ->where('id', '!=', Auth::id())
                      ->where('admin', '!=', 1)
+                     ->where('block', '!=', 1)
                      ->get();
 
         return view('user.new-message', compact('users'));
     }
 
-    public function viewmessage($id)
+    public function viewmessage($id, $notificationid = null)
     {
         $viewmessage = Message::with('fromUser')->findOrFail($id);
 
         if($viewmessage->status == 0){
 
             $viewmessage->update(['status' => 1]);
+        }
+
+        if($notificationid != NULL) {
+
+            $this->readSingleNotification($notificationid);
         }
 
         return view('user.view-message', compact('viewmessage'));
@@ -98,6 +104,11 @@ class HomeController extends Controller
         $user->unreadNotifications->markAsRead();
 
         return back();
+    }
+
+    protected function readSingleNotification($notificationid)
+    {
+        return auth()->user()->unreadNotifications->where('id', $notificationid)->markAsRead();
     }
 
     public function searchSentMessage()

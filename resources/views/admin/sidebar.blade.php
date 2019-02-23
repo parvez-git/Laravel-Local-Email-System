@@ -7,6 +7,9 @@
             <li class="list-group-item {{ Request::is('admin/lostuser') ? 'bg-light' : '' }}">
                 <a href="{{ route('admin.user.lost') }}" class="text-dark {{ Request::is('admin/lostuser') ? 'font-weight-bold' : '' }}">Lost</a>
             </li>
+            <li class="list-group-item {{ Request::is('admin/returned') ? 'bg-light' : '' }}">
+                <a href="{{ route('admin.user.returned') }}" class="text-dark {{ Request::is('admin/returned') ? 'font-weight-bold' : '' }}">Returned</a>
+            </li>
         </ul>
     </div>
 </div>

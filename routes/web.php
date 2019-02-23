@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
@@ -23,17 +23,17 @@ Route::prefix('home')->name('home')->group(function(){
 	Route::get('/composemessage', 'HomeController@composemessage')->name('.composemessage');
 	Route::get('/searchsentmessage', 'HomeController@searchSentMessage')->name('.sentmessage.search');
 	Route::get('/searchreceivedmessage', 'HomeController@searchReceivedMessage')->name('.receivedmessage.search');
-	Route::get('/viewmessage/{id}', 'HomeController@viewmessage')->name('.viewmessage');
+	Route::get('/viewmessage/{id}/{notificationid?}', 'HomeController@viewmessage')->name('.viewmessage');
 	Route::get('/sentmessage', 'HomeController@sentmessage')->name('.sentmessage');
 	Route::post('/messagesend', 'HomeController@messageSend')->name('.message.send');
 	Route::get('/clearnotifications', 'HomeController@markAsReadNotification')->name('.notification.clear');
 });
 
-Route::middleware(['auth','admin'])->group(function ()
+Route::middleware(['auth','admin'])->prefix('admin')->group(function ()
 {
-	Route::get('/admin', 'AdminController@index')->name('admin.index');
-	Route::get('/admin/lostuser', 'AdminController@lost')->name('admin.user.lost');
-	Route::get('/admin/returned', 'AdminController@returned')->name('admin.user.returned');
-	Route::put('/admin/userblock/{id}', 'AdminController@block')->name('admin.user.block');
-	Route::delete('/admin/userdelete/{id}', 'AdminController@delete')->name('admin.user.delete');
+	Route::get('/', 'AdminController@index')->name('admin.index');
+	Route::get('/lostuser', 'AdminController@lost')->name('admin.user.lost');
+	Route::get('/returned', 'AdminController@returned')->name('admin.user.returned');
+	Route::put('/userblock/{id}', 'AdminController@block')->name('admin.user.block');
+	Route::delete('/userdelete/{id}', 'AdminController@delete')->name('admin.user.delete');
 });
